@@ -1,5 +1,5 @@
-// pages/[id].js
 "use client";
+import ResponsiveAppBar from "@/app/ResponsiveAppBar";
 import { useEffect, useState } from "react";
 
 import Skeleton from "react-loading-skeleton";
