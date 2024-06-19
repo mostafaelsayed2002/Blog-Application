@@ -39,7 +39,7 @@ export default function Page({ params }: { params: { id: string } }) {
     <div className=" flex flex-col gap-10  m-10 items-center justify-center p-10">
       {loading && <CardSkeleton />}
       {!loading && (
-        <PostCard id={post?.id} title={post?.title ?? ""} body={post.body} />
+        <PostCard id={post.id} title={post.title} body={post.body} />
       )}
       <div>
         <Link href={`/Home`}>
