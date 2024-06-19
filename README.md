@@ -8,8 +8,9 @@ This is a [Next.js](https://nextjs.org/) project.
 
 To clone this repository to your local machine, use the following command:
 
-git clone [slash-task](https://github.com/mostafaelsayed2002/slash-task)
-
+```bash
+git clone https://github.com/mostafaelsayed2002/slash-task
+```
 
 Then, run the development server:
 
