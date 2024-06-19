@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ResponsiveAppBar from "./ResponsiveAppBar";
+import ResponsiveAppBar from "./responsiveAppBar";
+import { SkeletonTheme } from "react-loading-skeleton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ResponsiveAppBar />
-        {children}
+        <SkeletonTheme baseColor="#ffffff" highlightColor="#234">
+          <ResponsiveAppBar />
+          {children}
+        </SkeletonTheme>
       </body>
     </html>
   );

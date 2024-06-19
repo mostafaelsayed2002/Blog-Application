@@ -1,13 +1,19 @@
 "use client";
-import ResponsiveAppBar from "@/app/ResponsiveAppBar";
-import { useEffect, useState } from "react";
 
+import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
+import PostCard from "../../postCard";
+import CardSkeleton from "@/app/cardSkeleton";
+
 export default function Page({ params }: { params: { id: string } }) {
-  const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [post, setPost] = useState<{
+    title: string;
+    id: number;
+    body: string;
+  } | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,24 +35,11 @@ export default function Page({ params }: { params: { id: string } }) {
   }, []);
 
   return (
-    <main>
-      <div className="flex flex-col items-center gap-5 p-5">
-        {loading ? (
-          <Skeleton />
-        ) : (
-          <div
-            key={post.id}
-            className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-          >
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {post.title}
-            </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              {post.body}
-            </p>
-          </div>
-        )}
-      </div>
-    </main>
+    <div className="flex m-10 items-center justify-center  p-10">
+      {loading && <CardSkeleton />}
+      {!loading && (
+        <PostCard id={post.id} title={post.title} body={post.body} />
+      )}
+    </div>
   );
 }

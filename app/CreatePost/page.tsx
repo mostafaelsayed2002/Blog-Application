@@ -1,7 +1,6 @@
 "use client";
 import { error } from "console";
 import { useEffect, useState } from "react";
-import ResponsiveAppBar from "../ResponsiveAppBar";
 
 export default function Home() {
   const [title, setTitle] = useState("");
@@ -10,7 +9,7 @@ export default function Home() {
   const [created, setCreated] = useState(false);
 
   function handleSubmit() {
-    if (!title || !body) {
+    if (title.trim() === "" || body.trim() === "") {
       setErrot("You must fill all fields");
       setCreated(false);
       return;
