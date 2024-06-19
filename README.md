@@ -1,7 +1,5 @@
 # Next.js Project
 
-This is a [Next.js](https://nextjs.org/) project.
-
 ## Getting Started
 
 ### Cloning the Repository
