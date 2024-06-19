@@ -38,7 +38,7 @@ export default function Page({ params }: { params: { id: string } }) {
   return (
     <div className=" flex flex-col gap-10  m-10 items-center justify-center p-10">
       {loading && <CardSkeleton />}
-      {!loading && (
+      {!loading && post && (
         <PostCard id={post.id} title={post.title} body={post.body} />
       )}
       <div>
