@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
-import CardSkeleton from "../cardSkeleton";
-import PostCard from "../postCard";
+import CardSkeleton from "../../Components/cardSkeleton";
+import PostCard from "../../Components/postCard";
 import Link from "next/link";
 
 export default function Home() {
@@ -38,7 +38,9 @@ export default function Home() {
           {" "}
           <div className="grid gap-5 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 m-5 mt-10">
             {Array.from({ length: 10 }).map((_, index) => (
-              <CardSkeleton key={index} />
+              <div className="h-[300px] w-[400px]">
+                <CardSkeleton key={index} />
+              </div>
             ))}
           </div>
         </div>
@@ -47,15 +49,17 @@ export default function Home() {
           <div className="grid gap-5 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 m-5 mt-10">
             {posts.map((post) => (
               <Link key={post.id} href={`/Post/${post.id}`}>
-                <PostCard
-                  id={post.id}
-                  title={post.title}
-                  body={
-                    post.body.length > 100
-                      ? post.body.substring(0, 100) + "..."
-                      : post.body
-                  }
-                />
+                <div className="h-[300px] w-[400px]">
+                  <PostCard
+                    id={post.id}
+                    title={post.title}
+                    body={
+                      post.body.length > 100
+                        ? post.body.substring(0, 100) + "..."
+                        : post.body
+                    }
+                  />
+                </div>
               </Link>
             ))}
           </div>

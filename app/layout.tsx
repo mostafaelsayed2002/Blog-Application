@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ResponsiveAppBar from "./responsiveAppBar";
+import ResponsiveAppBar from "../Components/responsiveAppBar";
 import { SkeletonTheme } from "react-loading-skeleton";
 
 const inter = Inter({ subsets: ["latin"] });

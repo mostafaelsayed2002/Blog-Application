@@ -1,4 +1,5 @@
 "use client";
+import { TextField, TextareaAutosize } from "@mui/material";
 import { error } from "console";
 import { useEffect, useState } from "react";
 
@@ -14,6 +15,11 @@ export default function Home() {
       setCreated(false);
       return;
     }
+    if (title.length > 50) {
+      setErrot("Title must be less than 100 characters");
+      setCreated(false);
+      return;
+    }
     setErrot("");
     setTitle("");
     setBody("");
@@ -22,32 +28,35 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col items-center p-10">
+      <div className="flex flex-col items-center p-12">
         <div className=" font-bold text-4xl">Create Post</div>
-        <div>
-          <div className="flex flex-col gap-5 mt-5">
-            <input
+        <div className="w-full px-10 max-w-[600px]">
+          <div className=" flex flex-col gap-5 mt-5">
+            <TextField
+              id="outlined-basic"
+              label="Title"
+              variant="outlined"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              type="text"
-              placeholder="Title"
-              className="p-2 border border-gray-200 rounded-lg"
             />
+
             <textarea
               value={body}
               onChange={(e) => setBody(e.target.value)}
               placeholder="Body"
-              className="p-2 border border-gray-200 rounded-lg"
+              className=" h-[300px] p-2 border border-gray-400 rounded-md placeholder:text-gray-500 "
             />
             <button
               onClick={handleSubmit}
-              className="p-2 bg-blue-500 text-white rounded-lg"
+              className="p-2 bg-[#17335e] hover:bg-[#3c65a2] font-bold text-xl text-white rounded-lg"
             >
               Create
             </button>
           </div>
-          {error !== "" && <div className="text-red-500">{error}</div>}
-          {created && <div className="text-green-500">Post created</div>}
+          {error !== "" && <div className="text-red-500 text-lg">{error}</div>}
+          {created && (
+            <div className="text-green-500 text-lg">Post created</div>
+          )}
         </div>
       </div>
     </>

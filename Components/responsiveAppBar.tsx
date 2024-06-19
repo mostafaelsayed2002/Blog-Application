@@ -8,11 +8,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 const pages = ["Home", "CreatePost"];
-
 function ResponsiveAppBar() {
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{ backgroundColor: "#102530" }}>
         <Toolbar disableGutters>
           <Typography
             variant="h6"
