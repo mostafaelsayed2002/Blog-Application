@@ -27,7 +27,7 @@ Open [http://localhost:3000/Home](http://localhost:3000/Home) with your browser 
 
 ### Images 
 
-![Image Description](https://drive.google.com/file/d/1NnNE_6he9AuahB1sj1lS4JIKoZhgoSUG/view?usp=sharing)
+![Image Description](https://drive.google.com/file/d/1NnNE_6he9AuahB1sj1lS4JIKoZhgoSUG/view)
 
 ![Image Description](https://drive.google.com/file/d/10AkK2-4tYqb5-81Jv_hIlymk9m_tf7ef/view?usp=sharing)
 
