@@ -7,7 +7,7 @@
 To clone this repository to your local machine, use the following command:
 
 ```bash
-git clone [https://github.com/mostafaelsayed2002/slash-task](https://github.com/mostafaelsayed2002/Blog-Application.git)
+git clone https://github.com/mostafaelsayed2002/Blog-Application.git
 ```
 
 Then, run the development server:
