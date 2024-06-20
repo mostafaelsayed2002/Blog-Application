@@ -25,13 +25,18 @@ bun dev
 Open [http://localhost:3000/Home](http://localhost:3000/Home) with your browser to see the result.
 
 
-### Images 
+## Images 
 
+### Home Page
 ![Image Description](https://i.imgur.com/lNyYeVE.png)
 
+### Post Page
 ![Image Description](https://i.imgur.com/LKCotZ8.png)
 
+### Create Post Page
 ![Image Description](https://i.imgur.com/fLbuFvZ.png)
+
+### Responsive Design
 ![Image Description](https://i.imgur.com/37pcsCi.png)
 ![Image Description](https://i.imgur.com/8CpXsRr.png)
 
