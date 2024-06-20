@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import CardSkeleton from "../../Components/cardSkeleton";
 import PostCard from "../../Components/postCard";
-import Link from "next/link";
 
 export default function Home() {
   const [posts, setPosts] = useState<

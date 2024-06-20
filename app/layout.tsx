@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import RightNavBar from "../Components/rightNavBar";
 import { SkeletonTheme } from "react-loading-skeleton";
-import { Grid } from "@mui/material";
 import ButtomNavBar from "@/Components/buttomNavBar";
 
 const inter = Inter({ subsets: ["latin"] });

@@ -19,11 +19,11 @@ export default function CommentCard({
       <div className="flex gap-3 ">
         <img
           src="https://as2.ftcdn.net/v2/jpg/00/65/77/27/1000_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
-          className="mt-1 rounded-full w-10 h-10 border-2 border-black"
+          className=" rounded-full w-10 h-10 border-2 border-black"
         />
         <div className="flex flex-col">
           <p className="font-bold">{fullName}</p>
-          <p className="text-gray-700">@{username}</p>
+          <p className="text-gray-700 text-sm">@{username}</p>
         </div>
       </div>
 

@@ -1,12 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-
 import PostCard from "../../../Components/postCard";
 import CardSkeleton from "@/Components/cardSkeleton";
-import Link from "next/link";
 import CommentCard from "@/Components/commentCard";
 import CommentSkeleton from "@/Components/commentSkeleton";
 

@@ -47,7 +47,7 @@ export default function Home() {
           />
           <button
             onClick={handleSubmit}
-            className="p-2 bg-black hover:bg-[#3c65a2] font-bold text-xl text-white rounded-lg"
+            className="p-2 bg-black hover:bg-[#112e5b] font-bold text-xl text-white rounded-lg"
           >
             Create
           </button>
