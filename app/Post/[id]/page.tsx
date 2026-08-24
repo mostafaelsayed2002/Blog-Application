@@ -96,6 +96,12 @@ export default function Page({ params }: { params: { id: string } }) {
         />
       )}
 
+
+
+
+
+
+
       <div className="h-full mt-4 flex flex-col gap-4">
         {!loading &&
           comments.map((comment) => (
