@@ -48,9 +48,9 @@ function RightNavBar() {
             >
               <path
                 fill="#000"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M7 1C3.68629 1 1 3.68629 1 7V17C1 20.3137 3.68629 23 7 23H17C20.3137 23 23 20.3137 23 17V7C23 3.68629 20.3137 1 17 1H7ZM11 11V6H13V11H18V13H13V18H11V13H6V11H11Z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               ></path>
             </svg>
           </div>

@@ -3,31 +3,23 @@ import { useEffect, useState } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import CardSkeleton from "../../Components/cardSkeleton";
 import PostCard from "../../Components/postCard";
+import { getPosts, Post } from "../../lib/api";
 
 export default function Home() {
-  const [posts, setPosts] = useState<
-    {
-      id: number;
-      title: string;
-      body: string;
-      tags: string[];
-      reactions: { likes: number; dislikes: number };
-      views: number;
-    }[]
-  >([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("https://dummyjson.com/posts");
-        if (res.status === 404) return;
-
-        const data = await res.json();
-        setPosts(data.posts);
-        setLoading(false);
+        const data = await getPosts();
+        setPosts(data);
       } catch (err) {
         console.error(err);
+        setError("Could not load posts. Is the backend running?");
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
@@ -43,6 +35,8 @@ export default function Home() {
             </div>
           ))}
         </div>
+      ) : error ? (
+        <div className="p-4 text-red-500 text-lg">{error}</div>
       ) : (
         <div className="flex flex-col justify-center mt-2 ">
           {posts.map((post) => (
@@ -56,7 +50,7 @@ export default function Home() {
                   : post.body
               }
               tags={post.tags}
-              reactions={post.reactions}
+              reactions={{ likes: post.likes, dislikes: post.dislikes }}
               views={post.views}
               show={true}
             />

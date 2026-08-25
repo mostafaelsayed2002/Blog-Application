@@ -1,29 +1,41 @@
 "use client";
-import { TextField, TextareaAutosize } from "@mui/material";
-import { error } from "console";
-import { useEffect, useState } from "react";
+import { TextField } from "@mui/material";
+import { useState } from "react";
+import { createPost } from "@/lib/api";
 
 export default function Home() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [error, setErrot] = useState("");
+  const [error, setError] = useState("");
   const [created, setCreated] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (title.trim() === "" || body.trim() === "") {
-      setErrot("You must fill all fields");
+      setError("You must fill all fields");
       setCreated(false);
       return;
     }
-    if (title.length > 50) {
-      setErrot("Title must be less than 100 characters");
+    if (title.length > 100) {
+      setError("Title must be less than 100 characters");
       setCreated(false);
       return;
     }
-    setErrot("");
-    setTitle("");
-    setBody("");
-    setCreated(true);
+
+    setSubmitting(true);
+    setError("");
+    try {
+      await createPost({ title: title.trim(), body: body.trim() });
+      setTitle("");
+      setBody("");
+      setCreated(true);
+    } catch (err) {
+      console.error(err);
+      setError(err instanceof Error ? err.message : "Could not create post");
+      setCreated(false);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -47,9 +59,10 @@ export default function Home() {
           />
           <button
             onClick={handleSubmit}
-            className="p-2 bg-black hover:bg-[#112e5b] font-bold text-xl text-white rounded-lg"
+            disabled={submitting}
+            className="p-2 bg-black hover:bg-[#112e5b] disabled:opacity-50 font-bold text-xl text-white rounded-lg"
           >
-            Create
+            {submitting ? "Creating..." : "Create"}
           </button>
         </div>
         {error !== "" && <div className="text-red-500 text-lg">{error}</div>}

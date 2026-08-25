@@ -6,68 +6,43 @@ import PostCard from "../../../Components/postCard";
 import CardSkeleton from "@/Components/cardSkeleton";
 import CommentCard from "@/Components/commentCard";
 import CommentSkeleton from "@/Components/commentSkeleton";
+import { getComments, getPost, Post, Comment } from "@/lib/api";
 
 export default function Page({ params }: { params: { id: string } }) {
   const [loading, setLoading] = useState(true);
   const [loading2, setLoading2] = useState(true);
-  const [post, setPost] = useState<{
-    title: string;
-    id: number;
-    body: string;
-    tags: string[];
-    reactions: { likes: number; dislikes: number };
-    views: number;
-    show: boolean;
-  } | null>(null);
-
+  const [post, setPost] = useState<Post | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
-
-  interface Comment {
-    id: number;
-    body: string;
-    postId: number;
-    likes: number;
-    user: {
-      id: number;
-      username: string;
-      fullName: string;
-    };
-  }
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`https://dummyjson.com/posts/${params.id}`);
-        if (res.status === 404) return;
-
-        const data = await res.json();
-
+        const data = await getPost(params.id);
         setPost(data);
-        setLoading(false);
       } catch (err) {
         console.error(err);
+        setError("Could not load this post.");
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
-  }, []);
+  }, [params.id]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(
-          `https://dummyjson.com/posts/${params.id}/comments`
-        );
-        if (res.status === 404) return;
-
-        const data = await res.json();
-        setComments(data.comments);
-        setLoading2(false);
+        const data = await getComments(params.id);
+        setComments(data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setLoading2(false);
       }
     };
     fetchData();
-  }, []);
+  }, [params.id]);
 
   return (
     <div className="h-screen  flex flex-col  border-r border-gray-300 w-full lg:w-[800px] md:w-[600px]">
@@ -84,23 +59,21 @@ export default function Page({ params }: { params: { id: string } }) {
         </div>
       )}
 
+      {!loading && error && (
+        <div className="p-4 text-red-500 text-lg">{error}</div>
+      )}
+
       {!loading && !loading2 && post && (
         <PostCard
           id={post.id}
           title={post.title}
           body={post.body}
-          reactions={post.reactions}
+          reactions={{ likes: post.likes, dislikes: post.dislikes }}
           views={post.views}
           tags={post.tags}
           show={false}
         />
       )}
-
-
-
-
-
-
 
       <div className="h-full mt-4 flex flex-col gap-4">
         {!loading &&
@@ -110,8 +83,7 @@ export default function Page({ params }: { params: { id: string } }) {
               id={comment.id}
               body={comment.body}
               likes={comment.likes}
-              username={comment.user.username}
-              fullName={comment.user.fullName}
+              authorName={comment.authorName}
             />
           ))}
       </div>

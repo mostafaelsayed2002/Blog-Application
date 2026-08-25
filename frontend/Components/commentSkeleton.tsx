@@ -1,4 +1,3 @@
-import { tree } from "next/dist/build/templates/app-page";
 import Skeleton from "react-loading-skeleton";
 
 export default function CommentSkeleton() {
