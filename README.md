@@ -59,8 +59,7 @@ Open [http://localhost:3000](http://localhost:3000) — it redirects to `/Home`.
 
 ## Notes
 
-- Auth is intentionally out of scope: posts and comments are anonymous/free-text (`authorName`), matching the app's original design.
-- Docker, deployment, and CI/CD are left for you to wire up.
+- Docker, deployment, and CI/CD 
 
 ## Images
 
