@@ -40,6 +40,17 @@ export async function createPost(data: {
   return prisma.post.create({ data });
 }
 
+// Comments are removed automatically: Comment.post declares onDelete: Cascade
+// in prisma/schema.prisma, so the database handles the children.
+export async function deletePost(id: number) {
+  try {
+    return await prisma.post.delete({ where: { id } });
+  } catch (err) {
+    if (isNotFoundPrismaError(err)) throw new NotFoundError(`Post ${id} not found`);
+    throw err;
+  }
+}
+
 export async function reactToPost(
   id: number,
   type: "like" | "dislike",

@@ -74,6 +74,34 @@ describe("posts routes", () => {
     });
   });
 
+  describe("DELETE /api/posts/:id", () => {
+    it("400s on a non-numeric id", async () => {
+      const res = await request(app).delete("/api/posts/abc");
+
+      expect(res.status).toBe(400);
+      expect(mockedService.deletePost).not.toHaveBeenCalled();
+    });
+
+    it("404s when the post does not exist", async () => {
+      mockedService.deletePost.mockRejectedValue(new NotFoundError("Post 9 not found"));
+
+      const res = await request(app).delete("/api/posts/9");
+
+      expect(res.status).toBe(404);
+      expect(res.body.error).toMatch(/not found/i);
+    });
+
+    it("204s with an empty body on success", async () => {
+      mockedService.deletePost.mockResolvedValue({ id: 1 } as any);
+
+      const res = await request(app).delete("/api/posts/1");
+
+      expect(res.status).toBe(204);
+      expect(res.text).toBe("");
+      expect(mockedService.deletePost).toHaveBeenCalledWith(1);
+    });
+  });
+
   describe("PATCH /api/posts/:id/reaction", () => {
     it("400s on an invalid reaction type", async () => {
       const res = await request(app)
