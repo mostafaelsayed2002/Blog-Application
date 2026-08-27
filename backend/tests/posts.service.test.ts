@@ -8,6 +8,7 @@ jest.mock("../src/lib/prisma", () => ({
       findUnique: jest.fn(),
       create: jest.fn(),
       update: jest.fn(),
+      delete: jest.fn(),
     },
     comment: {
       findMany: jest.fn(),
@@ -74,6 +75,30 @@ describe("posts.service", () => {
 
       expect(result).toBe(created);
       expect(mockedPrisma.post.create).toHaveBeenCalledWith({ data });
+    });
+  });
+
+  describe("deletePost", () => {
+    it("deletes the post and returns it", async () => {
+      const deleted = { id: 1, title: "Gone" };
+      mockedPrisma.post.delete.mockResolvedValue(deleted);
+
+      const result = await postsService.deletePost(1);
+
+      expect(result).toBe(deleted);
+      expect(mockedPrisma.post.delete).toHaveBeenCalledWith({ where: { id: 1 } });
+    });
+
+    it("throws NotFoundError when the post does not exist", async () => {
+      mockedPrisma.post.delete.mockRejectedValue(notFoundPrismaError());
+
+      await expect(postsService.deletePost(404)).rejects.toThrow(NotFoundError);
+    });
+
+    it("rethrows unexpected errors instead of swallowing them", async () => {
+      mockedPrisma.post.delete.mockRejectedValue(new Error("connection lost"));
+
+      await expect(postsService.deletePost(1)).rejects.toThrow("connection lost");
     });
   });
 

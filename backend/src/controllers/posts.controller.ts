@@ -47,6 +47,13 @@ export async function createPost(req: Request, res: Response) {
   res.status(201).json(post);
 }
 
+export async function deletePost(req: Request, res: Response) {
+  const id = parseId(req.params.id, "post");
+  await postsService.deletePost(id);
+  // 204 No Content: the delete succeeded and there is nothing left to return.
+  res.status(204).send();
+}
+
 export async function reactToPost(req: Request, res: Response) {
   const id = parseId(req.params.id, "post");
   const { type, delta } = req.body ?? {};

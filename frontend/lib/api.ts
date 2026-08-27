@@ -35,6 +35,9 @@ async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
     throw new Error(message || `Request failed with status ${res.status}`);
   }
 
+  // 204 No Content has an empty body — calling res.json() on it throws.
+  if (res.status === 204) return undefined as T;
+
   return res.json();
 }
 
@@ -55,6 +58,10 @@ export function createPost(data: {
     method: "POST",
     body: JSON.stringify(data),
   });
+}
+
+export function deletePost(id: number | string): Promise<void> {
+  return apiFetch<void>(`/posts/${id}`, { method: "DELETE" });
 }
 
 export function reactToPost(
